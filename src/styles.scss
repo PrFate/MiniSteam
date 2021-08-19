@@ -33,6 +33,12 @@ body {
 
     &--primary {
         width: 100%;
+        transition: all .3s ease-out;
+    }
+
+    &--primary:hover {
+        background-color: #987CFF;
+        transform: translateY(-.5rem);
     }
 
     &--purple {

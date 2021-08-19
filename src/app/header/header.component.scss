@@ -1,0 +1,35 @@
+.header {
+    background-color: #eee;
+    padding: 1.5rem 3rem;
+    width: 100vw;
+}
+
+.nav {
+    width: 100%;
+
+    &__list {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        list-style-type: none;
+    }
+
+    &__item {
+        margin-right: 2rem;
+        transition: all .2s ease;
+        color: #1e1e1e;
+    }
+
+    &__item:hover {
+        color: #5438FF;
+        transform: translateY(-.2rem);
+    }
+
+    &__link {
+        font-size: 1.8rem;
+        font-family: sans-serif;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}

@@ -15,6 +15,7 @@ import { GameSearchComponent } from './games/games-list/game-search/game-search.
 import { FiltersComponent } from './games/games-list/filters/filters.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { FriendsComponent } from './friends/friends.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FriendsComponent } from './friends/friends.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

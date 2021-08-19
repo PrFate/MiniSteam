@@ -1,14 +1,14 @@
 <main class="main">
-    <section class="login">
-        <h2 class="heading-secondary u-margin-bottom-small">Sign In</h2>
-        <div class="login__input-group u-margin-bottom-small">
-            <label class="login__label" for="emailInputEl">Email</label>
-            <input class="login__text-input" id="emailInputEl" name="email" type="text" placeholder="Email" required>
-        </div>
-        <div class="login__input-group u-margin-bottom-small">
-            <label class="login__label" for="passwordInputEl">Password</label>
-            <input class="login__text-input" id="passwordInputEl" name="password" type="password" placeholder="Password" required>
-        </div>
-        <button class="btn btn--primary btn--purple">Sign In</button>
-    </section>
+    <form class="login" [formGroup]="loginForm" (submit)="login()">
+            <h2 class="heading-secondary u-margin-bottom-small">Sign In</h2>
+            <div class="login__input-group u-margin-bottom-small">
+                <label class="login__label" for="emailInputEl">Email</label>
+                <input class="login__text-input" formControlName="email" id="emailInputEl" type="text" placeholder="Email" required>
+            </div>
+            <div class="login__input-group u-margin-bottom-small">
+                <label class="login__label" for="passwordInputEl">Password</label>
+                <input class="login__text-input" formControlName="password" id="passwordInputEl" type="password" placeholder="Password" required>
+            </div>
+            <button class="btn btn--primary btn--purple" type="submit" [disabled]="!loginForm.valid">Sign In</button>
+    </form>
 </main>
