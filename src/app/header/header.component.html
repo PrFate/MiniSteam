@@ -2,21 +2,21 @@
     <nav class="nav">
         <ul class="nav__list">
             <li class="nav__item">
-                <a class="nav__link">
+                <a routerLink="/" class="nav__link">
                     <img class="nav__icon" src="../../assets/icon.svg">
                 </a>
             </li>
             <li class="nav__item">
-                <a class="nav__link">Games</a>
+                <a routerLink="/games" class="nav__link">Games</a>
             </li>
             <li class="nav__item">
-                <a class="nav__link">Library</a>
+                <a (click)="navigateTo('library')" class="nav__link">Library</a>
             </li>
             <li class="nav__item">
-                <a class="nav__link">Friends</a>
+                <a (click)="navigateTo('friends')" class="nav__link">Friends</a>
             </li>
             <li class="nav__item">
-                <a class="nav__link">Profile</a>
+                <a (click)="navigateTo('profile')" class="nav__link">Profile</a>
             </li>
         </ul>
     </nav>

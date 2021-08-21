@@ -10,30 +10,33 @@ import { UserService } from '../user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  public editForm: FormGroup;
-  public user: User | undefined;
+  editForm: FormGroup;
+  user: User | undefined;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    console.group('onInit profile');
-    console.log(this.userService.user);
-    console.groupEnd();
     this.user = this.userService.user;
-    this.editForm = this.generateeditFormGroup();
+    this.editForm = this.generateEditFormGroup();
   }
 
-  public generateeditFormGroup() {
+
+  generateEditFormGroup() {
     return new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
+      email: new FormControl(this.user?.email, [Validators.required, Validators.email]),
+      password: new FormControl(this.user?.password, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
       username: new FormControl(null),
       age: new FormControl(null)
     });
   }
 
-  public submit() {
-
+  submit() {
+    console.group('submit()');
+    console.dir(this.editForm.value);
+    console.groupEnd();
+    const {email, password, username, age} = this.editForm.value;
+    const res = this.userService.updateUser$(email, password, username, age);
+    res.subscribe(() => console.log('did smth'));
   }
 
 }

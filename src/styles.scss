@@ -15,9 +15,17 @@ body {
     background-color: #bbb;
 }
 
-.heading-secondary {
+.heading-secondary,
+.heading-tertiary {
     font-family: sans-serif;
+}
+
+.heading-secondary {
     font-size: 2.5rem;
+}
+
+ .heading-tertiary {
+    font-size: 2rem;
 }
 
 .btn {

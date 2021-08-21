@@ -1,10 +1,11 @@
 import {Game} from './game.model';
 
 export class User {
-    public userName: string | null;
-    public age: number | null;
-    public friends: User[] | null;
-    public games: Game[] | null;
-
-    constructor(public email: string, public password: string) {}
+    constructor(public email: string, 
+                public password: string, 
+                public games: Game[] = [],
+                public userName: string = '',
+                public age: number | null = null,
+                public friends: User[] = [],
+                public id: string = '_' + Math.random().toString(36).substr(2, 9)) {}
 }

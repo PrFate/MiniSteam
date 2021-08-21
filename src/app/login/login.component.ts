@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import {UserService} from '../user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import {UserService} from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -20,14 +21,14 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.generateLoginFormGroup();
   }
 
-  public generateLoginFormGroup() {
+  generateLoginFormGroup() {
     return new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)])
     });
   }
-
-  public findInvalidControls() {
+  // TODO: add a display for error message in case if invalid properties were inputed
+  findInvalidControls() {
     const invalid = [];
     const controls = this.loginForm.controls;
     for (const name in controls) {
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     return invalid;
 }
 
-  public login() {
+  login() {
     const {email, password} = this.loginForm.value;
     const invalidControls = this.findInvalidControls();
     if (invalidControls.length) {
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
     }
     this.userService.login(email, password);
     if (this.userService.user) {
+      //TODO: REPLACE '/profile' with '/games'
       this.router.navigate(['/games'], {relativeTo: this.route});
       return;
     }
