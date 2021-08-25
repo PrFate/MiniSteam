@@ -1,0 +1,53 @@
+<!-- <main class="main">
+    <div *ngIf="game; else noGame">
+        <p>{{ game.title }}</p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet repudiandae magni id voluptatem quidem enim vitae itaque, exercitationem nam illo atque dolorem cupiditate quo autem voluptates, error sequi! Repellendus, non.
+        </p>
+    </div>
+    <ng-template #noGame>
+        404 not found
+    </ng-template>
+</main> -->
+<main  *ngIf="game; else noGame" class="main">
+    <section class="game">
+        <div class="game__primary-info">
+            <div class="game__img-cont">
+                <!-- TODO - replace dummy image with image from database -->
+                <img src="../../../assets/dummyImg.png" alt="Game image" class="game__img">
+            </div>
+            <div class="game__segment-collection game__segment-collection--1 u-margin-left-5pc">
+                <article class="game__segment">
+                    <h2 class="heading-secondary game__title">{{ game.title }}</h2>
+                    <p class="game__subheading">{{ game.subheading }}</p>
+                </article>
+                <p class="game__segment game__tags">
+                    Tags: 
+                    <span *ngFor="let tag of game.tags">
+                        {{'#' + tag + ' '}}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="game__secondary-info">
+            <div class="game__segment-collection game__segment-collection--hw u-margin-right">
+                <div class="game__segment game__price-segment">
+                    <p class="game__price">Just {{ game.price }}$</p>
+                </div>
+                <div class="game__button">
+                    <div class="game__btn-inner-border">GO!</div>
+                </div>
+            </div>
+                <div class="game__desc-outer-border">
+                    <div class="game__description">
+                        {{ game.description }}
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>
+<ng-template #noGame>
+    <main class="main">
+        <p class="heading-secondary game__title">404 not found</p>
+    </main>
+</ng-template>

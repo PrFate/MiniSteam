@@ -1,8 +1,8 @@
 *,
 *::after,
 *::before {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: inherit;
 }
 
@@ -11,8 +11,13 @@ html {
 }
 
 body {
+    background: linear-gradient(#191B1D, #292C3A) fixed;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
     box-sizing: border-box;
-    background-color: #bbb;
+    color: #848998;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .heading-secondary,
@@ -26,36 +31,69 @@ body {
 
  .heading-tertiary {
     font-size: 2rem;
+    font-weight: 500;
+
+    &--white {
+        color: azure;
+        letter-spacing: .2rem;
+    } 
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btns > .btn {
+    width: 49%;
 }
 
 .btn {
     align-items: center;
     border-radius: 5px;
     border-width: 0;
+    box-shadow: -.1rem 0 .4rem rgba(0, 0, 0, .5), .1rem .1rem .4rem rgba(0, 0, 0, .5);
     display: flex;
     font-family: sans-serif;
     font-size: 1.6rem;
     justify-content: center;
     max-height: 3.4rem;
     padding: 1.4rem 2rem;
+    transition: all .3s ease-out;
+
+    &:hover {
+        transform: translateY(-.5rem);
+    }
 
     &--primary {
         width: 100%;
-        transition: all .3s ease-out;
     }
 
     &--primary:hover {
         background-color: #987CFF;
-        transform: translateY(-.5rem);
     }
 
     &--purple {
         background-color:#5438FF;
         color: azure;
     }
+
+    &--white {
+        background-color: azure;
+        color: #5438FF;
+    }
 }
 
 /************************************** UTILITY CLASSES **************************************/
 .u-margin-bottom-small {
     margin-bottom: 2rem;
+}
+
+.u-margin-left-5pc {
+    margin-left: 5%;
+}
+
+.u-margin-right {
+    margin-right: 5%;
 }

@@ -1,0 +1,138 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8rem 12rem;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.game__primary-info,
+.game__secondary-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.game__primary-info {
+    margin-bottom: 3rem;
+}
+
+.game__img-cont {
+    width: 100%;
+    background-color: #2C2F3E;
+    border-radius: 1rem;
+    box-shadow: -.3rem -.3rem .3rem 0 rgba(59, 61, 76, .4), .3rem .3rem .3rem .2rem rgba(19, 21, 36, .5);
+    padding: 2.5rem;
+    flex-grow: 2;
+}
+
+.game__img {
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.game__segment-collection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game__segment-collection--hw {
+    width: 50%;
+    perspective: 1000px;
+    justify-content: start;
+}
+
+.game__segment {
+    box-shadow: -.3rem -.3rem .3rem .2rem rgba(59, 61, 76, .4), .3rem .3rem .3rem .2rem rgba(19, 21, 36, .5);
+    border-radius: 1rem;
+    padding: 2.3rem 1.7rem;
+    width: 100%;
+}
+
+.heading-secondary,
+.game__price {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.game__title {
+    margin-bottom: 2rem;
+}
+
+.game__subheading,
+.game__tags {
+    font-size: 1.5rem;
+}
+
+.game__tags {
+    /*
+    TODO - gradient text with seconf color - #77E7FF
+    */
+    color: #0FFF27;
+}
+
+.game__price-segment {
+    width: 100%;
+    margin-bottom: 4rem;
+}
+
+.game__button {
+    align-self: center;
+    background-color: rgb(34, 36, 43);
+    box-shadow: -.3rem -.3rem .3rem .2rem rgba(74, 76, 83, .4), .3rem .3rem .3rem .2rem rgba(14, 16, 23, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    transition: all .2s ease-out;
+}
+
+.game__btn-inner-border {
+    box-shadow: -.3rem -.3rem .3rem .2rem rgba(14, 16, 23, .5), .3rem .3rem .3rem .2rem rgba(74, 76, 83, .4);
+    border-radius: 50%;
+    color: #0FFF27;
+    display: flex;
+    font-size: 3.4rem;
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.game__button:hover {
+    transform: translateZ(4rem);
+    box-shadow: -.3rem -.3rem .3rem .3rem rgba(74, 76, 83, .4), .3rem .3rem .3rem .4rem rgba(14, 16, 23, .5);
+}
+
+.game__button:active {
+    transform: translateZ(2rem);
+    box-shadow: -.3rem -.3rem .3rem .2rem rgba(74, 76, 83, .4), .3rem .3rem .3rem .3rem rgba(14, 16, 23, .5);
+}
+
+.game__desc-outer-border {
+    background: linear-gradient(to right top, #D1AD83, #77E7FF);
+    border-radius: 1rem;
+    padding: 1.1rem;
+    width: 80%;
+    max-height: 32rem;
+}
+
+.game__description {
+    background-color: #272938;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    height: 99%;
+}

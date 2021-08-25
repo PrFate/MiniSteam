@@ -7,5 +7,5 @@ export class User {
                 public userName: string = '',
                 public age: number | null = null,
                 public friends: User[] = [],
-                public id: string = '_' + Math.random().toString(36).substr(2, 9)) {}
+                public id: string = '' + Math.random().toString(36).substr(2, 9)) {}
 }

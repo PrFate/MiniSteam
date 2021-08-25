@@ -1,0 +1,22 @@
+<form [formGroup]="filtersForm" class="filters">
+    <h3>Filter by Price</h3>
+    <div>
+        <input #priceFilterInputEl [formControl]="priceFilterInput" type="range" min="0" max="2000" step="50">
+        <label for="priceRangeEl">{{ priceFilterInputEl.value }}</label>
+    </div>
+    <h3>Filter by Category</h3>
+    <div>
+        <div class="">
+            <label for="inputTagAdventureEl">Adventure</label>
+            <input formControlName="adventure" id="inputTagAdventureEl" type="checkbox">
+        </div>
+        <div class="">
+            <label for="inputTagActionEl">Action</label>
+            <input formControlName="action" id="inputTagActionEl" type="checkbox">
+        </div>
+        <div class="">
+            <label for="inputTagIndieEl">Indie</label>
+            <input formControlName="indie" id="inputTagIndieEl" type="checkbox">
+        </div>
+    </div>
+</form>

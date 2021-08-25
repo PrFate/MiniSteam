@@ -1,24 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { UserService } from './user.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = 'MiniSteam';
-  isUserAuthorized: Observable<boolean>;
-  subscription: Subscription;
 
-  constructor(private userService: UserService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.isUserAuthorized = this.userService.isUserLoggedIn;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnInit(): void {}
 }

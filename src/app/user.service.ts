@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, of } from "rxjs";
 import { tap } from 'rxjs/operators';
 
 import {User} from './models/user.model';
@@ -27,18 +27,26 @@ export class UserService {
     private readonly users$ = new BehaviorSubject<User[]>(this.dummyUsers);
 
     user: User;
-    isUserLoggedIn: Observable<boolean> = new BehaviorSubject<boolean>(false);
+    isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
 
     login(email: string, password: string) {
         const users = this.users$.getValue();
         users.forEach(userEl => {
-            console.table([userEl, {email, password}])
             if (userEl.email === email && userEl.password === password) {
                 this.user = userEl;
-                this.isUserLoggedIn = new BehaviorSubject<boolean>(true).asObservable();
+                this.isUserLoggedIn$.next(true);
                 return;
             }
         });
+    }
+
+    logoutUser() {
+        console.group('logout()');
+        console.groupEnd();
+    }
+
+    getUserStatus() {
+        return this.isUserLoggedIn$.asObservable();
     }
 
     updateUser$(email: string, password: string, userName: string, age: number) {
@@ -73,5 +81,19 @@ export class UserService {
         console.group('addFriend()');
         console.log(email);
         console.groupEnd();
+    }
+
+    addGame(game: Game): void {
+        for (let i = 0; i < this.user.games.length; i++) {
+            if (game.title === this.user.games[i].title) {
+                alert('You have already purchased this game');
+                return;
+            }
+        }
+        this.user.games.push(game);
+    }
+
+    getUsersGames() {
+        return of(this.user.games);
     }
 }

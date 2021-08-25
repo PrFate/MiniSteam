@@ -1,0 +1,16 @@
+<div class="game">
+    <div (click)="navigateToGameDetails()" class="game__head">
+        <h3 class="heading-tertiary heading-tertiary--white">{{ game.title }}</h3>
+        <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price }}</p>
+    </div>
+    <div class="game__body">
+        <p class="game__subheading">{{ game.subheading }}</p>
+        <button *ngIf="!isUsersLibrary; else buttons" (click)="addToUsersLibrary()" class="btn btn--primary btn--purple">Add to Library</button>
+        <ng-template #buttons>
+            <span class="btns">
+                <button (click)="loadTheVirus()" class="btn btn--purple">Download</button>
+                <button (click)="copyLinkToBuffer()" class="btn btn--white">Share</button>
+            </span>
+        </ng-template>
+    </div>
+</div>

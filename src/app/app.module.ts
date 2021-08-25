@@ -9,12 +9,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { FriendsListComponent } from './friends-list/friends-list.component';
 import { FriendItemComponent } from './friends-list/friend-item/friend-item.component';
 import { FriendsSearchComponent } from './friends-list/friends-search/friends-search.component';
-import { GamesListComponent } from './games-list/games-list.component';
-import { GameItemComponent } from './games-list/game-item/game-item.component';
-import { GameSearchComponent } from './games-list/game-search/game-search.component';
-import { FiltersComponent } from './games-list/filters/filters.component';
-import { GameDetailsComponent } from './game-details/game-details.component';
+import { GamesListComponent } from './games/games-list/games-list.component';
+import { GameItemComponent } from './games/games-list/game-item/game-item.component';
+import { GameSearchComponent } from './games/game-search/game-search.component';
+import { FiltersComponent } from './games/filters/filters.component';
+import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     GameItemComponent,
     GameSearchComponent,
     FiltersComponent,
-    GameDetailsComponent
+    GameDetailsComponent,
+    GamesComponent
   ],
   imports: [
     BrowserModule,

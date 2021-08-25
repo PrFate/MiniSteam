@@ -1,0 +1,7 @@
+<main class="main">
+     <app-game-search *ngIf="isNotUsersLibrary" (nameEntered)="onNameInputted($event)"></app-game-search>
+     <div class="games">
+          <app-games-list [games$]="games$"></app-games-list>
+          <app-filters *ngIf="isNotUsersLibrary" (tagSelected)="onTagSelected($event)" (priceSelected)="onPriceSelected($event)"></app-filters>
+     </div>
+</main>
