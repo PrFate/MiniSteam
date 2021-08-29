@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Friend, FriendRequest } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-friend-item',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendItemComponent implements OnInit {
 
+  @Input() friend: Friend | undefined;
+  @Input() type: 'friend' | 'newFriendRequest' | 'usersFriendRequest' | 'potentialFriend';
+  @Input() request: FriendRequest | undefined;
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

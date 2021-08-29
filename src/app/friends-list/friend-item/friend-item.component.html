@@ -1,1 +1,7 @@
-<p>friend-item works!</p>
+<p class="friends-list__user">{{friend?.userName ? friend?.userName : friend?.email}}</p>
+<div [ngSwitch]="type">
+        <app-btn-add [potentialFriend]="friend" *ngSwitchCase="'potentialFriend'"></app-btn-add>
+        <app-btn-decline-accept [friendRequest]="request" *ngSwitchCase="'newFriendRequest'"></app-btn-decline-accept>
+        <app-btn-remove [friend]="friend" *ngSwitchCase="'friend'"></app-btn-remove>
+        <p *ngSwitchDefault>{{ request?.status }}</p>
+</div>

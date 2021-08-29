@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +20,10 @@ import { FiltersComponent } from './games/filters/filters.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GamesComponent } from './games/games.component';
+import { BtnRemoveComponent } from './friends-list/friend-item/btn-remove/btn-remove.component';
+import { BtnAddComponent } from './friends-list/friend-item/btn-add/btn-add.component';
+import { BtnDeclineAcceptComponent } from './friends-list/friend-item/btn-decline-accept/btn-decline-accept.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,12 +39,17 @@ import { GamesComponent } from './games/games.component';
     GameSearchComponent,
     FiltersComponent,
     GameDetailsComponent,
-    GamesComponent
+    GamesComponent,
+    BtnRemoveComponent,
+    BtnAddComponent,
+    BtnDeclineAcceptComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

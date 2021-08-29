@@ -1,16 +1,18 @@
 <div class="game">
+    <img class="game__img" src="https://www.mirf.ru/wp-content/uploads/2017/10/SuperMarioOdyssey1.jpg" alt="game poster">
     <div (click)="navigateToGameDetails()" class="game__head">
         <h3 class="heading-tertiary heading-tertiary--white">{{ game.title }}</h3>
         <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price }}</p>
     </div>
     <div class="game__body">
-        <p class="game__subheading">{{ game.subheading }}</p>
-        <button *ngIf="!isUsersLibrary; else buttons" (click)="addToUsersLibrary()" class="btn btn--primary btn--purple">Add to Library</button>
+        <p class="game__subheading">{{ game.subheading.slice(0, 175) + '...' }}</p>
+        <button *ngIf="!isUsersLibrary; else buttons" (click)="addToUsersLibrary()" class="btn btn--primary btn--gradient-big btn--gradient-big-1">Add to Library</button>
         <ng-template #buttons>
             <span class="btns">
-                <button (click)="loadTheVirus()" class="btn btn--purple">Download</button>
-                <button (click)="copyLinkToBuffer()" class="btn btn--white">Share</button>
+                <button (click)="loadTheVirus()" class="btn btn--gradient btn--gradient-side btn--gradient-left">Download</button>
+                <button (click)="copyLinkToBuffer()" class="btn btn--gradient btn--gradient-side btn--gradient-right">Share</button>
             </span>
         </ng-template>
     </div>
 </div>
+<!-- TODO - use a 'local currency' to trannsform prices to local values -->

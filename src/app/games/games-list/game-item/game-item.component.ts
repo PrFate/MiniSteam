@@ -40,6 +40,7 @@ export class GameItemComponent implements OnInit {
   }
 
   navigateToGameDetails() {
+    console.dir(this.game);
     this.router.navigate(['/games', this.game.id]);
   }
 }

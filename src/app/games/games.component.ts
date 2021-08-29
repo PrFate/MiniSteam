@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { GameService } from '../game.service';
 import { Game } from '../models/game.model';
 import { UserService } from '../user.service';
@@ -19,20 +19,42 @@ export class GamesComponent implements OnInit {
   gamePrice: number = 0;
   // url path flag
   isNotUsersLibrary: boolean;
+  // prev and next pages buttons state flags
+  isNextBtnDisabled: boolean;
+  isPrevBtnDisabled: boolean;
+  // btns subs
+  nextBtnSub: Subscription;
+  prevBtnSub: Subscription;
 
   constructor(private gameService: GameService,
               private userService: UserService,
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.isNotUsersLibrary = this.route.snapshot.url[0].path !== 'library';
-    if (this.isNotUsersLibrary) {
-      this.games$ = this.gameService.getFeaturedGames();
-    } else {
-      this.games$ = this.userService.getUsersGames();
-    }
+    this.route.url.subscribe((url) => {
+      // identifying what type of library this should be based on route
+      this.isNotUsersLibrary = url[0].path !== 'library';
+      if (this.isNotUsersLibrary) {
+        this.games$ = this.gameService.getFeaturedGames();
+      } else {
+        this.games$ = this.userService.getUsersGames();
+      }
+      // checking if we should display btns
+      this.nextBtnSub = this.gameService.getNextBtnState().subscribe(val => {
+        this.isNextBtnDisabled = val;
+      });
+      this.prevBtnSub = this.gameService.getPrevBtnState().subscribe(val => {
+        this.isPrevBtnDisabled = val;
+      });
+    });
   }
 
+  ngOnDestroy() {
+    this.nextBtnSub.unsubscribe();
+    this.prevBtnSub.unsubscribe();
+  }
+  // handling game filters changes
+  // TODO - make new db requests on filter changes
   onNameInputted(name: string) {
     this.gameName = name;
     this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
@@ -44,12 +66,20 @@ export class GamesComponent implements OnInit {
     } else {
       this.gamesTags.splice(this.gamesTags.indexOf(tagData.name), 1);
     }
-    console.table(this.gamesTags);
     this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
   }
 
   onPriceSelected(price: number) {
     this.gamePrice = price;
-    this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
+    //this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
+    this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
+  }
+  // handling paginnation
+  getNextGames() {
+    this.gameService.nextPage(this.gameName, this.gamesTags, this.gamePrice);
+  }
+
+  getPreviousGames() {
+    this.gameService.prevPage(this.gameName, this.gamesTags, this.gamePrice);
   }
 }

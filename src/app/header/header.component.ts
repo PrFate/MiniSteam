@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    // TODO - implement logoutUser() method of the UserService
     this.userService.logoutUser();
+    this.router.navigate(['/']);
   }
 }

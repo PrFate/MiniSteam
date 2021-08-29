@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)])
     });
   }
-  // TODO: add a display for error message in case if invalid properties were inputed
+  // TODO - add a display for error message in case if invalid properties were inputed
   findInvalidControls() {
     const invalid = [];
     const controls = this.loginForm.controls;
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
         }
     }
     return invalid;
-}
-
+  }
+  // TODO - make a sign in page or just add a new user if old one haven't been found
   login() {
     const {email, password} = this.loginForm.value;
     const invalidControls = this.findInvalidControls();
@@ -46,12 +46,10 @@ export class LoginComponent implements OnInit {
       alert('Invalid email or password');
     }
     this.userService.login(email, password);
-    if (this.userService.user) {
-      //TODO: REPLACE '/profile' with '/games'
-      this.router.navigate(['/games'], {relativeTo: this.route});
-      return;
-    }
-    alert(`Couldn't find this user, please, try again`);
+    console.log('No time for losers');
+    console.dir(this.userService.user);
+    this.router.navigate(['/games'], {relativeTo: this.route});
+    
   }
 
 }

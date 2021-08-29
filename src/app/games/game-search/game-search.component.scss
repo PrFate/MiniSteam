@@ -1,21 +1,22 @@
 .search {
+    align-self: flex-start;
+    text-align: left;
     width: 100%;
+}
 
-    &__form {
-        display: flex;
-        flex-direction: row;
-        height: 3.4rem;
-        justify-content: space-between;
-    }
+.search__form {
+    width: 100%;
+}
 
-    &__input {
-        border: 1px solid #555;
-        border-radius: 5px;
-        box-sizing: border-box;
-        flex-grow: 1;
-        font-size: 1.5rem;
-        height: 100%;
-        margin: 0 1rem 0 0;
-        padding: 0 .3rem;
-    }
+.search__input {
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background-color: #292C3A;
+    color: #aaa;
+    font-size: 1.3rem;
+    padding: 1.2rem;
+}
+
+.search__input:focus {
+    outline: none;
 }

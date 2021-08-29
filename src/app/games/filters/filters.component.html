@@ -1,22 +1,22 @@
 <form [formGroup]="filtersForm" class="filters">
-    <h3>Filter by Price</h3>
-    <div>
-        <input #priceFilterInputEl [formControl]="priceFilterInput" type="range" min="0" max="2000" step="50">
-        <label for="priceRangeEl">{{ priceFilterInputEl.value }}</label>
+    <h3 class="heading-tertiary">Filter by Price</h3>
+    <div class="filter__price">
+        <input class="filter__price-input" #priceFilterInputEl [formControl]="priceFilterInput" type="range" min="0" max="2000" step="50">
+        <label class="filter__price-label" for="priceRangeEl">{{ priceFilterInputEl.value }}</label>
     </div>
-    <h3>Filter by Category</h3>
-    <div>
-        <div class="">
-            <label for="inputTagAdventureEl">Adventure</label>
-            <input formControlName="adventure" id="inputTagAdventureEl" type="checkbox">
+    <h3 class="heading-tertiary">Filter by Category</h3>
+    <div class="filters__tags">
+        <div class="filters__tag-group">
+            <label class="filters__tag-input" for="inputTagAdventureEl">Adventure</label>
+            <input class="filters__tag-label" formControlName="adventure" id="inputTagAdventureEl" type="checkbox">
         </div>
-        <div class="">
-            <label for="inputTagActionEl">Action</label>
-            <input formControlName="action" id="inputTagActionEl" type="checkbox">
+        <div class="filters__tag-group">
+            <label class="filters__tag-input" for="inputTagActionEl">Action</label>
+            <input class="filters__tag-label" formControlName="action" id="inputTagActionEl" type="checkbox">
         </div>
-        <div class="">
-            <label for="inputTagIndieEl">Indie</label>
-            <input formControlName="indie" id="inputTagIndieEl" type="checkbox">
+        <div class="filters__tag-group">
+            <label class="filters__tag-input" for="inputTagIndieEl">Indie</label>
+            <input class="filters__tag-label" formControlName="indie" id="inputTagIndieEl" type="checkbox">
         </div>
     </div>
 </form>

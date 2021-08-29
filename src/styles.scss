@@ -24,13 +24,13 @@ body {
 .heading-tertiary {
     font-family: sans-serif;
 }
-
+/* TODO - define one color for all the headings */
 .heading-secondary {
     font-size: 2.5rem;
 }
 
  .heading-tertiary {
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 500;
 
     &--white {
@@ -39,28 +39,20 @@ body {
     } 
 }
 
-.btns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.btns > .btn {
-    width: 49%;
-}
-
 .btn {
     align-items: center;
     border-radius: 5px;
     border-width: 0;
-    box-shadow: -.1rem 0 .4rem rgba(0, 0, 0, .5), .1rem .1rem .4rem rgba(0, 0, 0, .5);
-    display: flex;
+    box-shadow: -.3rem -.3rem .3rem 0 rgba(59, 61, 76, .4), .3rem .3rem .3rem .2rem rgba(19, 21, 36, .5);
+    display: inline-flex;
     font-family: sans-serif;
     font-size: 1.6rem;
     justify-content: center;
     max-height: 3.4rem;
     padding: 1.4rem 2rem;
     transition: all .3s ease-out;
+    background-color: #272938;
+    color: #848998;
 
     &:hover {
         transform: translateY(-.5rem);
@@ -69,20 +61,74 @@ body {
     &--primary {
         width: 100%;
     }
+}
 
-    &--primary:hover {
-        background-color: #987CFF;
-    }
+.btn--primary {
+    width: 100%;
+}
 
-    &--purple {
-        background-color:#5438FF;
-        color: azure;
-    }
+.btn--gradient {
+    background-clip: padding-box;
+    border: none;
+    border-left: solid 2px transparent;
+    position: relative;
+}
 
-    &--white {
-        background-color: azure;
-        color: #5438FF;
-    }
+.btn--gradient-side {
+    width: 49%;
+}
+
+.btn--gradient-side:hover {
+    transform: translateY(-.2rem);
+}
+
+.btn--gradient-side:active {
+    transform: translate(-.1rem);
+}
+
+.btn--gradient-left {
+    border-radius: 5px 0 0 5px;
+}
+
+.btn--gradient-right {
+    border-radius: 0 5px 5px 0;
+}
+
+.btn--gradient-big {
+    border: none;
+    border-radius: 0;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.btn--gradient-big-1 {
+    border-image: linear-gradient(to bottom, #0FFF27, #C2B2FF) 1 100%;
+}
+
+.btn--gradient-big:active {
+    box-shadow: -.3rem -.3rem .3rem 0 rgba( 19, 21, 36, .5), .3rem .3rem .3rem .2rem rgba(59, 61, 76, .4);
+}
+
+.btn--gradient::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, #0FFF27, #C2B2FF);
+}
+
+.btn--gradient::before:disabled {
+    background: #848998;
+}
+
+.btn--gradient-side:disabled {
+    transition: none;
+}
+
+.btns {
+    width: 100%;
 }
 
 /************************************** UTILITY CLASSES **************************************/

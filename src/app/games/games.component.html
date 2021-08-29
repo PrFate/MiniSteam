@@ -1,7 +1,11 @@
 <main class="main">
      <app-game-search *ngIf="isNotUsersLibrary" (nameEntered)="onNameInputted($event)"></app-game-search>
-     <div class="games">
+     <div class="games-filters">
           <app-games-list [games$]="games$"></app-games-list>
           <app-filters *ngIf="isNotUsersLibrary" (tagSelected)="onTagSelected($event)" (priceSelected)="onPriceSelected($event)"></app-filters>
+     </div>
+     <div class="btns">
+          <button [disabled]="isPrevBtnDisabled" (click)="getPreviousGames()" class="btn btn--gradient btn--gradient-side btn--gradient-left">Previous</button>
+          <button [disabled]="isNextBtnDisabled" (click)="getNextGames()" class="btn btn--gradient btn--gradient-side btn--gradient-right">Next</button>
      </div>
 </main>
