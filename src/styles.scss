@@ -105,6 +105,10 @@ body {
     border-image: linear-gradient(to bottom, #0FFF27, #C2B2FF) 1 100%;
 }
 
+.btn--gradient-big-2 {
+    border-image: linear-gradient(to bottom, #C2B2FF, #FF7777) 1 100%;
+}
+
 .btn--gradient-big:active {
     box-shadow: -.3rem -.3rem .3rem 0 rgba( 19, 21, 36, .5), .3rem .3rem .3rem .2rem rgba(59, 61, 76, .4);
 }

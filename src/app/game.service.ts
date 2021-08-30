@@ -120,7 +120,12 @@ export class GameService {
     
             this.lastInResponse = response.docs[response.docs.length - 1];
             for (let item of response.docs) {
-              this.games.push(item.data() as Game);
+              const gameData: Object = item.data() as Object;
+              const game = {
+                ...gameData,
+                id: item.id
+            }
+              this.games.push(game as Game);
             }
     
             this.pagination_click_count++;
@@ -142,7 +147,7 @@ export class GameService {
         this.prev_start_at.push(prev_first_doc);
     }
 
-        //Remove not required document 
+    //Remove not required document 
     pop_prev_startAt(prev_first_doc: any) {
         this.prev_start_at.forEach((element: any) => {
         if (prev_first_doc.data().id == element.data().id) {
@@ -151,7 +156,7 @@ export class GameService {
         });
     }
 
-      //Return the Doc rem where previous page will startAt
+    //Return the Doc rem where previous page will startAt
     get_prev_startAt() {
         if (this.prev_start_at.length > (this.pagination_click_count + 1)) {
             this.prev_start_at.splice(this.prev_start_at.length - 2, this.prev_start_at.length - 1);

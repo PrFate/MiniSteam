@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import {UserService} from '../user.service';
 
@@ -9,9 +10,11 @@ import {UserService} from '../user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
+  // user subscription
+  userSub: Subscription;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -19,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.generateLoginFormGroup();
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 
   generateLoginFormGroup() {
@@ -45,11 +52,10 @@ export class LoginComponent implements OnInit {
     if (invalidControls.length) {
       alert('Invalid email or password');
     }
-    this.userService.login(email, password);
-    console.log('No time for losers');
-    console.dir(this.userService.user);
-    this.router.navigate(['/games'], {relativeTo: this.route});
-    
+    this.userSub = this.userService.login(email, password).subscribe(user => {
+      console.dir(user);
+      this.router.navigate(['/games'], {relativeTo: this.route});
+    });
   }
 
 }

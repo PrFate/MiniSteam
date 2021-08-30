@@ -2,8 +2,7 @@
     <section class="game">
         <div class="game__primary-info">
             <div class="game__img-cont">
-                <!-- TODO - replace dummy image with image from database -->
-                <img src="../../../assets/dummyImg.png" alt="Game image" class="game__img">
+                <img [src]="game.img" [alt]="game.title" class="game__img">
             </div>
             <div class="game__segment-collection game__segment-collection--1 u-margin-left-5pc">
                 <article class="game__segment">

@@ -4,5 +4,6 @@ export class Game {
                 public subheading: string,
                 public description: string = '',
                 public tags: string[] = [],
-                public id: string = '') {}
+                public id: string = '',
+                public img: string = '') {}
 }

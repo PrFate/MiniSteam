@@ -22,5 +22,5 @@ export class User {
                 public age: number | null = null,
                 public incomingRequests: FriendRequest[] = [],
                 public outgoingRequests: FriendRequest[] = [],
-                public id: string = '' + Math.random().toString(36).substr(2, 9)) {}
+                public id: string = '') {}
 }

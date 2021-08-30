@@ -1,6 +1,6 @@
 <div class="game">
-    <img class="game__img" src="https://www.mirf.ru/wp-content/uploads/2017/10/SuperMarioOdyssey1.jpg" alt="game poster">
     <div (click)="navigateToGameDetails()" class="game__head">
+        <img class="game__img" [src]="game.img" [alt]="game.title">
         <h3 class="heading-tertiary heading-tertiary--white">{{ game.title }}</h3>
         <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price }}</p>
     </div>
