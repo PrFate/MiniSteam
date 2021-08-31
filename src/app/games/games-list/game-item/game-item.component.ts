@@ -28,19 +28,16 @@ export class GameItemComponent implements OnInit {
 
   loadTheVirus() {
     // TODO - implement a joke with downloading a malicious file
-    console.group('loadTheVirus()');
-    console.groupEnd();
+    alert('Loading a virus to your machine');
   }
 
   copyLinkToBuffer() {
     // TODO - fix the copied text when i finish the game details page
-    console.group('copyLinkToBuffer()');
     navigator.clipboard.writeText(this.route.toString());
-    console.groupEnd();
+    alert('Link copied to your buffer');
   }
 
   navigateToGameDetails() {
-    console.dir(this.game);
     this.router.navigate(['/games', this.game.id]);
   }
 }

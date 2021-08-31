@@ -11,6 +11,7 @@ import { UserService } from '../user.service';
 export class HeaderComponent implements OnInit {
 
   isUserLoggedIn$: Observable<boolean>;
+  userId: string | undefined;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -18,6 +19,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isUserLoggedIn$ = this.userService.getUserStatus();
+    this.userService.$user.subscribe(usr => {
+      this.userId = usr.id
+    });
   }
 
   navigateTo(route: string) {
@@ -26,7 +30,7 @@ export class HeaderComponent implements OnInit {
     } else if (route === 'games') {
       this.router.navigate(['/games']);
     } else {
-      this.router.navigate(['/', route, this.userService.user.id], {relativeTo: this.route});
+      this.router.navigate(['/', route, this.userId], {relativeTo: this.route});
     }
   }
 

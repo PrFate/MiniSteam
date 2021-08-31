@@ -58,7 +58,6 @@ export class GameService {
     }
 
     prevPage(name: string = '', tags: string[] = [], price: number = 0) {
-      console.log(`prevPage(price: ${price})`);
         if (this.prev_start_at.length === 1) {
           this.searchForGames();
           this.disable_prev.next(true);
@@ -100,7 +99,6 @@ export class GameService {
       }
 
     nextPage(name: string = '', tags: string[] = [], price: number = 0) {
-      console.log(`nextPage(price: ${price})`);
       if (this.games.length < 6) {
         return;
       }

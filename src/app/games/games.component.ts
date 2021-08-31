@@ -38,6 +38,10 @@ export class GamesComponent implements OnInit {
         this.games$ = this.gameService.getFeaturedGames();
       } else {
         this.games$ = this.userService.getUsersGames();
+        this.games$.subscribe(games => {
+          console.log('ngOnInit()');
+          console.table(games);
+        });
       }
       // checking if we should display btns
       this.nextBtnSub = this.gameService.getNextBtnState().subscribe(val => {
@@ -54,7 +58,6 @@ export class GamesComponent implements OnInit {
     this.prevBtnSub.unsubscribe();
   }
   // handling game filters changes
-  // TODO - make new db requests on filter changes
   onNameInputted(name: string) {
     this.gameName = name;
     this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
@@ -74,7 +77,7 @@ export class GamesComponent implements OnInit {
     //this.games$ = this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
     this.gameService.searchForGames(this.gameName, this.gamesTags, this.gamePrice);
   }
-  // handling paginnation
+  // handling pagination
   getNextGames() {
     this.gameService.nextPage(this.gameName, this.gamesTags, this.gamePrice);
   }

@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       alert('Invalid email or password');
     }
     this.userSub = this.userService.login(email, password).subscribe(user => {
-      console.dir(user);
       this.router.navigate(['/games'], {relativeTo: this.route});
     });
   }

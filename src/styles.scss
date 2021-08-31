@@ -135,6 +135,27 @@ body {
     width: 100%;
 }
 
+.btn-friend,
+.btn-group {
+    width: calc(6rem + 15%);
+    max-width: 20rem;
+}
+
+.btn--remove {
+    background-color: #9D4242;
+    color: #eee;
+}
+
+.btn--accept {
+    background-color: #478E3C;
+    color: #eee;
+}
+
+.btn--pending {
+    background-color: #42519D;
+    color: #eee;
+}
+
 /************************************** UTILITY CLASSES **************************************/
 .u-margin-bottom-small {
     margin-bottom: 2rem;
@@ -146,4 +167,8 @@ body {
 
 .u-margin-right {
     margin-right: 5%;
+}
+
+.u-margin-bottom-medium {
+    margin-bottom: 4rem;
 }

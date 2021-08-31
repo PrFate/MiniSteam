@@ -36,8 +36,6 @@ export class FriendsListComponent implements OnInit {
 
     this.userService.getUsersIncomingRequests()
       .subscribe(val => {
-        console.log('getUsersIncomingRequests()');
-        console.log(val);
         this.incomingReqs = val;
       });
 

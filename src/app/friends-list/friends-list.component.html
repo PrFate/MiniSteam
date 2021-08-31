@@ -1,69 +1,64 @@
 <main class="main">
     <!-- Friend search box -->
-    <section class="friends-search">
-        <h2 class="heading-secondary pretty-heading pretty-heading--bg">Search for new friends!</h2>
-        <form class="friends-search__form">
-            <input [formControl]="userTextInput" class="friends-search__text-input" type="text" placeholder="Enter user's username or email...">
-            <button class="search-btn searcch-btn--gp">Search</button>
+    <section class="search u-margin-bottom-medium">
+        <h2 class="heading-secondary heading-secondary--gradient-bg ">Search for New Friends!</h2>
+        <form class="search__form">
+            <input [formControl]="userTextInput" class="search__input" type="text" placeholder="Username or email...">
+            <button class="btn btn--gradient">Search</button>
         </form>
     </section>
     <!-- All user's friend-related information -->
     <article class="friends" *ngIf="noSearchIsInProgress; else searchResults">
-            <!-- Section for list of friends -->
-        <section class="friends-list" *ngIf="usersFriends$; else noFriends">
-            <h2 class="heading-secondary pretty-heading pretty-heading--rb">My Friends</h2>
-            <div class="friends-list__box" *ngFor="let friend of usersFriends$ |async">
+        <!-- Section for list of friends -->
+        <section class="friends__list" *ngIf="usersFriends$; else noFriends">
+            <h2 class="heading-secondary heading-secondary--gradient-rb">My Friends</h2>
+            <div class="friends__friend" *ngFor="let friend of usersFriends$ |async">
                 <app-friend-item [friend]="friend" type="friend"></app-friend-item>
             </div>
         </section>
         <!-- Section for displaying a message when there are no friends -->
         <ng-template #noFriends>
-            <section class="friends-list">
-            <h2 class="heading-secondary pretty-heading pretty-heading--rb">My Friends</h2>
-            <p class="nothing">You have no friends yet buddy!</p> 
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-rb">My Friends</h2>
+                <p class="nothing">You have no friends yet buddy!</p> 
             </section>
         </ng-template>
         <!-- Incoming friend requests section -->
-        <section class="friends-requests" *ngIf="incomingReqs; else noIncomingRequests">
-            <h2 class="heading-secondary pretty-heading pretty-heading--pr">New Friend Requests</h2>
-            <div class="friends-list__box" *ngFor="let request of incomingReqs">
-                <!-- <p class="friends-list__user">{{request.user.userName ? request.user.userName : request.user.email}}</p>
-                <div class="btn-group">
-                    <button class="friends-list__decline-btn">Decline</button>
-                    <button class="friends-list__accept-btn">Accept</button>
-                </div> -->
-                <app-friend-item [friend]="request.user" [request]="request"></app-friend-item>
-            </div>
+        <section class="friends__list" *ngIf="incomingReqs; else noIncomingRequests">
+            <h2 class="heading-secondary heading-secondary--gradient-rp">New Friend Requests</h2>
+                <div class="friends__friend" *ngFor="let request of incomingReqs">
+                    <app-friend-item [friend]="request.user" [request]="request"></app-friend-item>
+                </div>
         </section>
         <ng-template #noIncomingRequests>
-            <section class="friends-requests">
-                <h2 class="heading-secondary pretty-heading pretty-heading--pr">New Friend Requests</h2>
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-rp">New Friend Requests</h2>
                 <p class="nothing">You have no new requests</p> 
             </section>
         </ng-template>
         <!-- Outgoing friend requests section -->
-        <section class="friends-out-requests" *ngIf="outgoingReqs; else noOutgoingRequests">
-            <h2 class="heading-secondary pretty-heading pretty-heading--lbb">My Friend Requests</h2>
-            <div class="friends-list__box" *ngFor="let outRequest of outgoingReqs">
-                <p class="friends-list__user">{{outRequest.user.userName ? outRequest.user.userName : outRequest.user.email}}</p>
+        <section class="friends__list" *ngIf="outgoingReqs; else noOutgoingRequests">
+            <h2 class="heading-secondary heading-secondary--gradient-bb">My Friend Requests</h2>
+            <div class="friends__friend" *ngFor="let outRequest of outgoingReqs">
+                <p class="friends__friend-name">{{outRequest.user.userName ? outRequest.user.userName : outRequest.user.email}}</p>
                 <button [ngClass]="
-                    outRequest.status === 'pending' 
-                    ? 
-                    'friends-list__pending-btn'
-                    :
-                    outRequest.status === 'declined'
-                    ?
-                    'friends-list__declined-btn'
-                    :
-                    'friends-list__accepted-btn'
-                ">
-                    {{ outRequest.status.charAt(0).toLocaleUpperCase() + outRequest.status.slice(1) }}
-                </button>
+                outRequest.status === 'pending' 
+                ? 
+                'btn--pending'
+                :
+                outRequest.status === 'declined'
+                ?
+                'btn--remove'
+                :
+                'btn--accept'
+            " 
+            class="btn btn-friend btn--remove">{{ outRequest.status.charAt(0).toLocaleUpperCase() + outRequest.status.slice(1) }}</button>
             </div>
         </section>
+
         <ng-template #noOutgoingRequests>
-            <section class="friends-out-requests">
-                <h2 class="heading-secondary pretty-heading pretty-heading--lbb">My Friend Requests</h2>
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-bb">My Friend Requests</h2>
                 <p class="nothing">You haven't sent any requests</p> 
             </section>
         </ng-template>
@@ -71,11 +66,20 @@
     <!-- Friend search results -->
     <ng-template #searchResults>
         <article class="friends">
-            <p class="friends-search__results-title">{{ userTextInput.value }}</p>
+            <p class="friends-search__results-title"></p>
             <div class="friends-list__box" *ngFor="let potentialFriend of discoveredPotentialFriends$ |async">
                 <app-friend-item [friend]="potentialFriend" type="potentialFriend"></app-friend-item>
             </div>
             <app-friend-item></app-friend-item>
+        </article>
+
+        <article class="friends__list">
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-pb">{{ userTextInput.value }}</h2>
+                <div class="friends__friend" *ngFor="let potentialFriend of discoveredPotentialFriends$ |async">
+                    <app-friend-item [friend]="potentialFriend" type="potentialFriend"></app-friend-item>
+                </div>
+            </section>
         </article>
     </ng-template>
 </main>

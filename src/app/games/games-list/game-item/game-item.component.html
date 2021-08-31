@@ -2,7 +2,7 @@
     <div (click)="navigateToGameDetails()" class="game__head">
         <img class="game__img" [src]="game.img" [alt]="game.title">
         <h3 class="heading-tertiary heading-tertiary--white">{{ game.title }}</h3>
-        <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price }}</p>
+        <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price | currency }}</p>
     </div>
     <div class="game__body">
         <p class="game__subheading">{{ game.subheading.slice(0, 175) + '...' }}</p>
@@ -15,4 +15,3 @@
         </ng-template>
     </div>
 </div>
-<!-- TODO - use a 'local currency' to trannsform prices to local values -->

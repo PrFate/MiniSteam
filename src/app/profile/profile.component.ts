@@ -25,18 +25,14 @@ export class ProfileComponent implements OnInit {
     return new FormGroup({
       email: new FormControl(this.user?.email, [Validators.required, Validators.email]),
       password: new FormControl(this.user?.password, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
-      username: new FormControl(null),
-      age: new FormControl(null)
+      username: new FormControl(this.user?.userName),
+      age: new FormControl(this.user?.age)
     });
   }
 
   submit() {
-    console.group('submit()');
-    console.dir(this.editForm.value);
-    console.groupEnd();
     const {email, password, username, age} = this.editForm.value;
-    const res = this.userService.updateUser$(email, password, username, age);
-    res.subscribe(() => console.log('did smth'));
+    this.userService.updateUser(email, password, username, age);
   }
 
 }

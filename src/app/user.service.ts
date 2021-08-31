@@ -4,8 +4,8 @@ import { tap } from 'rxjs/operators';
 
 import {User, Friend, FriendRequest} from './models/user.model';
 import {Game} from './models/game.model';
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import * as firebase from "firebase/app";
+import { AngularFirestore, DocumentReference } from "@angular/fire/compat/firestore";
+import * as fs from "firebase/compat/app";
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +19,8 @@ export class UserService {
     friends$ = new Subject<Friend[]>();
     incomingRequests$ = new Subject<FriendRequest[]>();
     outgoingRequests$ = new Subject<FriendRequest[]>();
+    //firebase user document reference
+    userDocRef: DocumentReference<unknown>;
 
     constructor(private firestore: AngularFirestore) {}
 
@@ -32,7 +34,9 @@ export class UserService {
         .subscribe(response => {
             if (response.docs.length) {
                 this.user = response.docs[0].data() as User;
+                this.user.id = response.docs[0].id;
                 this.$user.next(this.user);
+                this.userDocRef = response.docs[0].ref;
             } else {
                 this.addUser(email, password);
             }
@@ -42,41 +46,54 @@ export class UserService {
     }
 
     addUser(email: string, password: string) {
-        const userInfo = {email, password};
+        const newUser = new User(email, password);
         this.firestore.collection('users')
-            .add(userInfo).then((docRef) => {
-                this.user = {...userInfo, id: docRef.id} as User;
+            .add({
+                email,
+                password
+            })
+            .then((docRef) => {
+                newUser.id = docRef.id;
+                this.user = newUser;
                 this.$user.next(this.user);
+                //setting docRef
+                this.userDocRef = docRef;
             });
     }
 
     logoutUser() {
         this.isUserLoggedIn$.next(false);
+        this.$user.next(undefined);
     }
 
     getUserStatus() {
         return this.isUserLoggedIn$.asObservable();
     }
 
-    updateUser$(email: string, password: string, userName: string, age: number) {
-        console.dir();
-        return of(null)
-            .pipe(
-                tap(() => {
-                    const users = this.users$.getValue().map(user => {
-                        if (user.email === email) {
-                            return {...user, email, password, userName, age};
-                        }
-                        return {...user};
-                    });
-                    this.users$.next(users);
-                }),
-                tap(() => {console.table(this.users$.getValue())})
-                );
+    updateUser(email: string, password: string, userName: string, age: number) {
+        this.userDocRef.update({
+            email,
+            password,
+            userName,
+            age
+        }).then(() => {
+            this.user = {
+                email,
+                password,
+                userName,
+                age,
+                id: this.user.id
+            } as User;
+            this.$user.next(this.user);
+        });
     }
 
     getUser() {
         return this.user;
+    }
+
+    getUserAsObs() {
+        return this.$user.asObservable
     }
 
     //***************************************************** handling friends
@@ -179,20 +196,37 @@ export class UserService {
 
     // handling user's games
     addGame(game: Game): void {
-        // this.firestore.collection('user').doc(this.user.id)
-        // .update({
-        //     games: 
-        // });
-        for (let i = 0; i < this.user.games.length; i++) {
-            if (game.title === this.user.games[i].title) {
-                alert('You have already purchased this game');
-                return;
+        console.group('addGame()');
+        console.dir(game);
+        console.groupEnd();
+        this.userDocRef
+        .get()
+        .then(doc => {
+            const usr = doc.data() as User;
+            if (usr.hasOwnProperty('games')) {
+                this.userDocRef
+                    .update({
+                        games: fs.default.firestore.FieldValue.arrayUnion(game)
+                    });
+            } else {
+                this.userDocRef
+                .set({
+                    games: [game]
+                }, {
+                    merge: true
+                });
             }
-        }
-        this.user.games.push(game);
+        });
     }
 
     getUsersGames() {
+        this.firestore.collection('users')
+        .doc(this.user.id)
+        .valueChanges()
+        .subscribe(usr => {
+            this.user.games = (usr as User).games;
+            this.$user.next(this.user);
+        });
         return of(this.user.games);
     }
 }

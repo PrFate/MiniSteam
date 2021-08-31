@@ -1,4 +1,4 @@
-<p class="friends-list__user">{{friend?.userName ? friend?.userName : friend?.email}}</p>
+<p class="friends__friend-name">{{friend?.userName ? friend?.userName : friend?.email}}</p>
 <div [ngSwitch]="type">
         <app-btn-add [potentialFriend]="friend" *ngSwitchCase="'potentialFriend'"></app-btn-add>
         <app-btn-decline-accept [friendRequest]="request" *ngSwitchCase="'newFriendRequest'"></app-btn-decline-accept>
