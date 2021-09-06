@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 
 import {User, Friend, FriendRequest} from './models/user.model';
 import {Game} from './models/game.model';
-import { AngularFirestore, DocumentReference } from "@angular/fire/compat/firestore";
+import { AngularFirestore, CollectionReference, DocumentReference } from "@angular/fire/compat/firestore";
 import * as fs from "firebase/compat/app";
 
 @Injectable({
@@ -93,29 +93,60 @@ export class UserService {
     }
 
     getUserAsObs() {
-        return this.$user.asObservable
+        return this.$user.asObservable();
     }
 
     //***************************************************** handling friends
-    getUsersFriends(email: string): Observable<Friend[] | undefined> {
-        const users = this.users$.getValue();
-        return of(users.find((user: User) => {
-            return user.email === email;
-        })?.friends);
+    getUsersFriends(): Observable<Friend[] | undefined> {
+        this.userDocRef
+        .get()
+        .then(usr => {
+            const friends = (usr.data() as User).friends;
+            this.friends$.next(friends);
+        });
+        return this.friends$.asObservable();
+    }
+
+    getConfiguredFriendRequest(ref: CollectionReference<any>) {
+            let resultRef = ref.where('email', '!=', this.user.email);
+            if (!this.user?.friends) {
+                return resultRef;
+            }
+            const userNames = this.user.friends.map(frnd => frnd.userName);
+            console.log('getConfiguredFriendRequest()');
+            console.log(userNames);
+            if (userNames.length) {
+                resultRef = resultRef.where('userName', 'not-in', userNames) as CollectionReference<any>;
+            }
+            resultRef = resultRef.where(
+                'email', 
+                'not-in', 
+                this.user.friends.map(frnd => frnd.email)
+            ) as CollectionReference<any>;
+            return resultRef;
     }
 
     findPotentialFriends(usernameOrEmail: string) {
-        // TODO - filter out users, that are already user's friends OR ARE in his outgoinng requests
-        const users = this.users$
-            .getValue()
-            .filter(
-                (user => user.email.includes(usernameOrEmail) || user.userName.includes(usernameOrEmail))
-            );
-        if (!users.length) {
-            return of(users as Friend[]);
-        }
-
-        return of(users as Friend[]);
+        // TODO - filter out users, that are already user's friends OR ARE in his outgoing requests
+        this.firestore.collection('users',
+            ref => this.getConfiguredFriendRequest(ref)
+            )
+        .snapshotChanges()
+        .subscribe(response => {
+            // response.forEach(val => console.dir(val.payload.doc.data()));
+            const friends = response.map(res => {
+                const user: Friend = res.payload.doc.data() as User;
+                user.id = res.payload.doc.id;
+                const friend: Friend = {
+                    email: user.email,
+                    userName: user.userName,
+                    id: user.id
+                }
+                return friend;
+            });
+            this.friends$.next(friends);
+        });
+        return this.friends$.asObservable();
     }
 
     sugestFriendship(email: string) {

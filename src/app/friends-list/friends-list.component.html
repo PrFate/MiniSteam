@@ -10,7 +10,7 @@
     <!-- All user's friend-related information -->
     <article class="friends" *ngIf="noSearchIsInProgress; else searchResults">
         <!-- Section for list of friends -->
-        <section class="friends__list" *ngIf="usersFriends$; else noFriends">
+        <section class="friends__list" *ngIf="hasFriends; else noFriends">
             <h2 class="heading-secondary heading-secondary--gradient-rb">My Friends</h2>
             <div class="friends__friend" *ngFor="let friend of usersFriends$ |async">
                 <app-friend-item [friend]="friend" type="friend"></app-friend-item>
