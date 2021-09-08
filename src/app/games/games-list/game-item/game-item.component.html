@@ -1,0 +1,17 @@
+<div class="game">
+    <div (click)="navigateToGameDetails()" class="game__head">
+        <img class="game__img" [src]="game.img" [alt]="game.title">
+        <h3 class="heading-tertiary heading-tertiary--white">{{ game.title }}</h3>
+        <p *ngIf="!isUsersLibrary" class="game__price">{{ game.price | currency }}</p>
+    </div>
+    <div class="game__body">
+        <p class="game__subheading">{{ game.subheading.slice(0, 175) + '...' }}</p>
+        <button *ngIf="!isUsersLibrary; else buttons" (click)="addToUsersLibrary()" class="btn btn--primary btn--gradient-big btn--gradient-big-1">Add to Library</button>
+        <ng-template #buttons>
+            <span class="btns">
+                <button (click)="loadTheVirus()" class="btn btn--gradient btn--gradient-side btn--gradient-left">Download</button>
+                <button (click)="copyLinkToBuffer()" class="btn btn--gradient btn--gradient-side btn--gradient-right">Share</button>
+            </span>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+.filters {
+    border-left: 2px solid #848998;
+    padding: .8rem;
+    margin-top: 5rem;
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.filters > * {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.filters__tags {
+    display: flex;
+    flex-direction: column;
+}
+
+.filters__tag-group:not(:last-child) {
+    margin-bottom: 1.2rem;
+}

@@ -1,0 +1,85 @@
+<main class="main">
+    <!-- Friend search box -->
+    <section class="search u-margin-bottom-medium">
+        <h2 class="heading-secondary heading-secondary--gradient-bg ">Search for New Friends!</h2>
+        <form class="search__form">
+            <input [formControl]="userTextInput" class="search__input" type="text" placeholder="Username or email...">
+            <button class="btn btn--gradient">Search</button>
+        </form>
+    </section>
+    <!-- All user's friend-related information -->
+    <article class="friends" *ngIf="noSearchIsInProgress; else searchResults">
+        <!-- Section for list of friends -->
+        <section class="friends__list" *ngIf="hasFriends; else noFriends">
+            <h2 class="heading-secondary heading-secondary--gradient-rb">My Friends</h2>
+            <div class="friends__friend" *ngFor="let friend of usersFriends$ |async">
+                <app-friend-item [friend]="friend" type="friend"></app-friend-item>
+            </div>
+        </section>
+        <!-- Section for displaying a message when there are no friends -->
+        <ng-template #noFriends>
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-rb">My Friends</h2>
+                <p class="nothing">You have no friends yet buddy!</p> 
+            </section>
+        </ng-template>
+        <!-- Incoming friend requests section -->
+        <section class="friends__list" *ngIf="incomingReqs; else noIncomingRequests">
+            <h2 class="heading-secondary heading-secondary--gradient-rp">New Friend Requests</h2>
+                <div class="friends__friend" *ngFor="let request of incomingReqs">
+                    <app-friend-item [friend]="request.user" [request]="request"></app-friend-item>
+                </div>
+        </section>
+        <ng-template #noIncomingRequests>
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-rp">New Friend Requests</h2>
+                <p class="nothing">You have no new requests</p> 
+            </section>
+        </ng-template>
+        <!-- Outgoing friend requests section -->
+        <section class="friends__list" *ngIf="outgoingReqs; else noOutgoingRequests">
+            <h2 class="heading-secondary heading-secondary--gradient-bb">My Friend Requests</h2>
+            <div class="friends__friend" *ngFor="let outRequest of outgoingReqs">
+                <p class="friends__friend-name">{{outRequest.user.userName ? outRequest.user.userName : outRequest.user.email}}</p>
+                <button [ngClass]="
+                outRequest.status === 'pending' 
+                ? 
+                'btn--pending'
+                :
+                outRequest.status === 'declined'
+                ?
+                'btn--remove'
+                :
+                'btn--accept'
+            " 
+            class="btn btn-friend btn--remove">{{ outRequest.status.charAt(0).toLocaleUpperCase() + outRequest.status.slice(1) }}</button>
+            </div>
+        </section>
+
+        <ng-template #noOutgoingRequests>
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-bb">My Friend Requests</h2>
+                <p class="nothing">You haven't sent any requests</p> 
+            </section>
+        </ng-template>
+    </article>
+    <!-- Friend search results -->
+    <ng-template #searchResults>
+        <article class="friends">
+            <p class="friends-search__results-title"></p>
+            <div class="friends-list__box" *ngFor="let potentialFriend of discoveredPotentialFriends$ |async">
+                <app-friend-item [friend]="potentialFriend" type="potentialFriend"></app-friend-item>
+            </div>
+            <app-friend-item></app-friend-item>
+        </article>
+
+        <article class="friends__list">
+            <section class="friends__list">
+                <h2 class="heading-secondary heading-secondary--gradient-pb">{{ userTextInput.value }}</h2>
+                <div class="friends__friend" *ngFor="let potentialFriend of discoveredPotentialFriends$ |async">
+                    <app-friend-item [friend]="potentialFriend" type="potentialFriend"></app-friend-item>
+                </div>
+            </section>
+        </article>
+    </ng-template>
+</main>

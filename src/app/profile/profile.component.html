@@ -1,0 +1,22 @@
+<main class="main">
+    <form class="login" [formGroup]="editForm" (submit)="submit()">
+        <h2 class="heading-secondary u-margin-bottom-small">Profile</h2>
+        <div class="login__input-group u-margin-bottom-small">
+            <label class="login__label" for="usernameInputEl">Username</label>
+            <input class="login__text-input" formControlName="username" id="usernameInputEl" type="text" placeholder="Username" required>
+        </div>
+        <div class="login__input-group u-margin-bottom-small">
+            <label class="login__label" for="emailInputEl">Email</label>
+            <input class="login__text-input" formControlName="email" id="emailInputEl" type="text" placeholder="Email" required>
+        </div>
+        <div class="login__input-group u-margin-bottom-small">
+            <label class="login__label" for="passwordInputEl">Password</label>
+            <input class="login__text-input" formControlName="password" id="passwordInputEl" type="password" placeholder="Password" required>
+        </div>
+        <div class="login__input-group u-margin-bottom-small">
+            <label class="login__label" for="ageInputEl">Age</label>
+            <input class="login__text-input" formControlName="age" id="ageInputEl" type="number" placeholder="Age" required>
+        </div>
+        <button class="btn btn--primary btn--purple" type="submit" [disabled]="!editForm.valid">Save</button>
+    </form>
+</main>

@@ -1,0 +1,6 @@
+<section class="games">
+    <h2 class="heading-secondary u-margin-bottom-small">{{ listTitle }}</h2>
+    <div class="games__list">
+        <app-game-item *ngFor="let gameEl of games$ | async" [game]="gameEl"></app-game-item>
+    </div>
+</section>

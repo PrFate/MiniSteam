@@ -1,0 +1,22 @@
+.search {
+    align-self: flex-start;
+    text-align: left;
+    width: 100%;
+}
+
+.search__form {
+    width: 100%;
+}
+
+.search__input {
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background-color: #292C3A;
+    color: #aaa;
+    font-size: 1.3rem;
+    padding: 1.2rem;
+}
+
+.search__input:focus {
+    outline: none;
+}

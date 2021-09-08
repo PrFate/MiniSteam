@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '10'
+before_install:
+- npm install -g @angular/cli
+install: npm install
+branches:
+  only:
+  - main
+deploy:
+  provider: heroku
+  api_key:
+    secure: aAIkLNgpzs6kMjf76AX5bAVF5X+tVr0lUWs6V85Qd4DKQ/SblR0ErZZxnTuZYqVRKv7HlUOgSJzWm2nwAuzRa8ZdmObnCI9wzRcFdEdXLSCvEeqEZIJheuxKn3QWXPMUqXSa0P5iB0nnSmKictqBZp+DiLBC1F/0sBk+HLRpHPN/maSIt752qPlg8Uej3bytaF5/CAS3CLW4S53g9sZmSXXgyWADOR+u7OfS/ocA7+6ui8bDJ8gMYu1LPHhr/YsVT4wAPjvYY7C0/6KPrp+MExJ1Whi0fK2oLEwhQ8Zv454ldavhhB2iSlKerFl1eZJNeI/48RvKIBzc3oj5ODKSiB+/n9FQrbsLoVL3zYV92UNt+6mOuT/ck+K0hXeMJX+utxDWVzNbG9aFaoFX78UJN9pYcZcASX+iTYM88BY6nLlPHSZwW5rP+IiFdFh5H0kvRmyPV1ZFrvpNdA20Rv5YR2f4M55n+cEjZQQHGaRkWYszrbrPl636H+HVpI9yka/A8OIMVk1D30Uq0qLwcCTkWjNEiDGsHv9lEEBoU5KF1yJXyJxsxxhUsyY2xbglp8C8OP/egAbNAS80xo5vBBTXdih6+NKEN/1BGFGgMITeRih3GzrerVDpvRmt/Zfpe3CEyGdywPhlwNyyDjxeA/BxH+XKfGRW0gN4W5XBBV6JU2g=
+  app: ministeam
+  on:
+    repo: PrFate/MiniSteam
+    branch: main
+  skip_cleanup: true

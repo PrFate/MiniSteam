@@ -1,1 +1,174 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: linear-gradient(#191B1D, #292C3A) fixed;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    box-sizing: border-box;
+    color: #848998;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.heading-secondary,
+.heading-tertiary {
+    font-family: sans-serif;
+}
+/* TODO - define one color for all the headings */
+.heading-secondary {
+    font-size: 2.5rem;
+}
+
+ .heading-tertiary {
+    font-size: 1.9rem;
+    font-weight: 500;
+
+    &--white {
+        color: azure;
+        letter-spacing: .2rem;
+    } 
+}
+
+.btn {
+    align-items: center;
+    border-radius: 5px;
+    border-width: 0;
+    box-shadow: -.3rem -.3rem .3rem 0 rgba(59, 61, 76, .4), .3rem .3rem .3rem .2rem rgba(19, 21, 36, .5);
+    display: inline-flex;
+    font-family: sans-serif;
+    font-size: 1.6rem;
+    justify-content: center;
+    max-height: 3.4rem;
+    padding: 1.4rem 2rem;
+    transition: all .3s ease-out;
+    background-color: #272938;
+    color: #848998;
+
+    &:hover {
+        transform: translateY(-.5rem);
+    }
+
+    &--primary {
+        width: 100%;
+    }
+}
+
+.btn--primary {
+    width: 100%;
+}
+
+.btn--gradient {
+    background-clip: padding-box;
+    border: none;
+    border-left: solid 2px transparent;
+    position: relative;
+}
+
+.btn--gradient-side {
+    width: 49%;
+}
+
+.btn--gradient-side:hover {
+    transform: translateY(-.2rem);
+}
+
+.btn--gradient-side:active {
+    transform: translate(-.1rem);
+}
+
+.btn--gradient-left {
+    border-radius: 5px 0 0 5px;
+}
+
+.btn--gradient-right {
+    border-radius: 0 5px 5px 0;
+}
+
+.btn--gradient-big {
+    border: none;
+    border-radius: 0;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.btn--gradient-big-1 {
+    border-image: linear-gradient(to bottom, #0FFF27, #C2B2FF) 1 100%;
+}
+
+.btn--gradient-big-2 {
+    border-image: linear-gradient(to bottom, #C2B2FF, #FF7777) 1 100%;
+}
+
+.btn--gradient-big:active {
+    box-shadow: -.3rem -.3rem .3rem 0 rgba( 19, 21, 36, .5), .3rem .3rem .3rem .2rem rgba(59, 61, 76, .4);
+}
+
+.btn--gradient::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, #0FFF27, #C2B2FF);
+}
+
+.btn--gradient::before:disabled {
+    background: #848998;
+}
+
+.btn--gradient-side:disabled {
+    transition: none;
+}
+
+.btns {
+    width: 100%;
+}
+
+.btn-friend,
+.btn-group {
+    width: calc(6rem + 15%);
+    max-width: 20rem;
+}
+
+.btn--remove {
+    background-color: #9D4242;
+    color: #eee;
+}
+
+.btn--accept {
+    background-color: #478E3C;
+    color: #eee;
+}
+
+.btn--pending {
+    background-color: #42519D;
+    color: #eee;
+}
+
+/************************************** UTILITY CLASSES **************************************/
+.u-margin-bottom-small {
+    margin-bottom: 2rem;
+}
+
+.u-margin-left-5pc {
+    margin-left: 5%;
+}
+
+.u-margin-right {
+    margin-right: 5%;
+}
+
+.u-margin-bottom-medium {
+    margin-bottom: 4rem;
+}

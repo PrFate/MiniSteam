@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: -.3rem -.3rem .3rem 0 rgba(59, 61, 76, .4), .3rem .3rem .3rem .2rem rgba(19, 21, 36, .5);
+    margin: 8rem 12rem;
+    padding: 4rem;
+    width: 80vw;
+}
+
+.games-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
